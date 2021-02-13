@@ -12,23 +12,75 @@
   var generateCode = '.__xe_generate_code'
   var _this
 
+
+  $.fn.serializeFiles = function() {
+      var form = $(this),
+          formData = new FormData(),
+          formParams = form.serializeArray();
+
+
+
+
+      $.each(form.find('input[type="file"]'), function(i, tag) {
+        $.each($(tag)[0].files, function(i, file) {
+          // get File Object
+          // var fileObject = file;
+          // var newObject  = {
+          //   'lastModified'     : fileObject.lastModified,
+          //   'lastModifiedDate' : fileObject.lastModifiedDate,
+          //   'name'             : fileObject.name,
+          //   'size'             : fileObject.size,
+          //   'type'             : fileObject.type
+          // };
+          formData.append(tag.name, file);
+        });
+      });
+
+      $.each(formParams, function(i, val) {
+        formData.append(val.name, val.value);
+      });
+
+
+
+
+      // if(val.name.indexOf('@') == -1) {
+      //   console.log(val.name);
+      //   console.log($('.form-col-logo_image .' + val.name));
+      // }
+
+      //
+      // '<li class="xeuio-ml__preview-item">',
+      //   '<input type="hidden" class="xeuio-ml__field" name="logo_image" value="e77b338a-9569-4875-8288-6dbba86b8a35">',
+      //   '<img class="xeuio-ml__preview-image" src="https://sparkweb.co.kr/storage/app/public/media/public/media_library/e7/7b/20210212210613554d614c00fa404847bd5e4c197af9754734aacc.png">',
+      //   '<button type="button" class="xeuio-ml__button xeuio-ml__remove">삭제</button>',
+      // '</li>'
+      // form.find('.xeuio-medialibrary')
+
+      return formData;
+    };
+
+
   // @deprecated ???
   $.fn.serializeObject = function () {
     var o = {}
     var a = this.serializeArray()
+
+    console.log(a);
+
     $.each(a, function () {
       if (o[this.name]) {
         if (!o[this.name].push) {
           o[this.name] = [o[this.name]]
         }
-
         o[this.name].push(this.value || '')
+
+
       } else {
         o[this.name] = this.value || ''
       }
     })
 
-    return o
+    return o;
   }
 
   var _applyPlugins = function () {
@@ -41,6 +93,7 @@
           var widget = this.value
           var url = $('.widget-skins').data('url')
           var code = $('.widget-skins').data('code')
+
           url += '?widget=' + widget
           if (typeof code !== 'undefined') {
             url += '&code=' + code
@@ -190,7 +243,27 @@
           data: {
             code: code
           }
-        }, options.callback)
+        }, function () {
+          // console.log(url, code, target);
+          var _code = JSON.parse(code);
+
+          for(var key in _code) {
+            if(key.indexOf('@') === -1) {
+              if($('.form-col-'+key).has('.xeuio-medialibrary').length > 0) {
+                  var _key = key;
+                  var _html =['<li class="xeuio-ml__preview-item">',
+                    '<input type="hidden" class="xeuio-ml__field" name="',key,'" value="',_code[key],'">',
+                    '<img class="xeuio-ml__preview-image" src="/file/',_code[key],'">',
+                    '<button type="button" class="xeuio-ml__button xeuio-ml__remove">삭제</button>',
+                    '</li>'].join('');
+                  setTimeout(function () {
+                    $('.form-col-'+_key+' .xeuio-ml__preview').prepend(_html);
+                  });
+              }
+            }
+          }
+          options.callback();
+        })
       },
 
       init: function () {
