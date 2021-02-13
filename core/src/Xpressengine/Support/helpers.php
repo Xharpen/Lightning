@@ -497,6 +497,23 @@ if (!function_exists('current_menu')) {
     }
 }
 
+if (!function_exists('file_url'))
+{
+    /**
+     * 저장된 파일 URL 반환
+     *
+     * @param string $fileId
+     * @param string|null $defaultUrl
+     *
+     * @return mixed|null
+     */
+    function file_url(string $fileId, string $defaultUrl = null)
+    {
+        $image = \Xpressengine\Storage\File::find($fileId);
+        return $image !== null ? $image->url() : $defaultUrl;
+    }
+}
+
 if (!function_exists('menu_list')) {
 
     /**
@@ -876,3 +893,4 @@ if (!function_exists('str_indent')) {
         return $indent;
     }
 }
+
