@@ -1,4 +1,6 @@
-XpressEngine 3
+![Lightning](https://sparkweb.co.kr/storage/app/public/media/public/media_library/e7/7b/20210212210613554d614c00fa404847bd5e4c197af9754734aacc.png)
+
+Lightning
 ==============
 
 [![License](http://img.shields.io/badge/license-GNU%20LGPL-brightgreen.svg)](http://www.gnu.org/licenses/gpl.html) [![Build Status](https://scrutinizer-ci.com/g/xpressengine/xpressengine/badges/build.png?b=master)](https://scrutinizer-ci.com/g/xpressengine/xpressengine/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/xpressengine/xpressengine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/xpressengine/xpressengine/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/xpressengine/xpressengine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/xpressengine/xpressengine/?branch=master)
@@ -30,7 +32,7 @@ Laravel is one of the most modern PHP frameworks and the most popular among them
 To install XE3, refer to the following guide. [Install guide](https://www.xpressengine.com/guide/getting-started/installation)
 
 ## Maintainers
-[akasima](https://github.com/akasima) [jhyeon1010](https://github.com/jhyeon1010) [sirwoongke](https://github.com/woongbin) [mjae404](https://github.com/mjae404)
+[parksu](https://github.com/xharpenParksuhyeon)
 
 ## Documentation
 * Documentation Site (Korean) : https://www.xpressengine.io/guide/README
@@ -42,7 +44,7 @@ To install XE3, refer to the following guide. [Install guide](https://www.xpress
 * Slack : https://xpressengine-forum-invite.herokuapp.com/
 
 ## License
-Copyright 2020 XEHub Corp. <https://www.xehub.io>
+Copyright 2021 Sparkweb Inc. <https://www.sparkweb.co.kr>
 
 "XpressEngine (XE)" is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
@@ -59,4 +61,4 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 ## Powered By
-* Xpressengine : https://www.xpressengine.com
+* Lightning : https://www.sparkweb.co.kr
