@@ -3,12 +3,14 @@
 {{ XeFrontend::js('assets/vendor/bootstrap/js/bootstrap.min.js')->load() }}
 {{ XeFrontend::js('assets/vendor/jqueryui/jquery-ui.min.js')->appendTo("head")->load() }}
 
+{{ XeFrontend::js('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')->appendTo("head")->load() }}
 
 {{ XeFrontend::css('https://cdn.jsdelivr.net/npm/xeicon@2.3/xeicon.min.css')->load() }}
 {{ XeFrontend::css([
     '/assets/vendor/jqueryui/jquery-ui.min.css',
     '/assets/vendor/bootstrap/css/bootstrap.min.css',
     '/assets/core/widgetbox/css/widgetbox.css',
+    'assets/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css',
 ])->load() }}
 
 <div class="widget-wrap">

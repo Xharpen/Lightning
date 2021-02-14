@@ -130,7 +130,9 @@ class WidgetController extends Controller
 
         $title = array_get($inputs, '@attributes.title', '');
 
-        return api_render('widget.form', compact('widget', 'skin', 'widgetForm', 'skinForm', 'code', 'title'));
+        $color = array_get($inputs, '@attributes.color', null);
+
+        return api_render('widget.form', compact('widget', 'skin', 'widgetForm', 'skinForm', 'code', 'title', 'color'));
     }
 
     /**
@@ -161,6 +163,8 @@ class WidgetController extends Controller
 
         $title = array_get($inputs, '@attributes.title', '');
 
+        $color = array_get($inputs, '@attributes.color', null);
+
         // widget list
         $widgetList = $widgetHandler->getAll();
         $widgets = [];
@@ -180,7 +184,7 @@ class WidgetController extends Controller
         $skin = $skinHandler->get($skin);
         $skinForm = $skin->renderSetting($inputs);
 
-        return api_render('widget.setup', compact('widgets', 'widget', 'title', 'skins', 'skin', 'widgetSelector', 'skinSelector', 'widgetForm', 'skinForm', 'code'));
+        return api_render('widget.setup', compact('widgets', 'widget', 'title', 'color', 'skins', 'skin', 'widgetSelector', 'skinSelector', 'widgetForm', 'skinForm', 'code'));
     }
 
     /**

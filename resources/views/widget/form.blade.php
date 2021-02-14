@@ -1,9 +1,11 @@
 <p>{{ xe_trans('xe::widgetSettings') }}</p>
 <hr>
+
 <form id="widgetForm" action="{{ route('settings.widget.generate') }}" method="post">
     <input type="hidden" name="@id" value="{{ $widget }}">
 
     {{ uio('formText', ['name'=>'@title', 'value'=> isset($title)?$title:'' , 'label'=>xe_trans('xe::widgetTitle'), 'class'=>'__xe_widget-title']) }}
+    {{ uio('formColorpicker', ['name'=>"@color", 'label'=>xe_trans('xe::widgetColor'), 'value'=>$color!== null?$color:'']) }}
 
     {!! $widgetForm !!}
 
@@ -15,7 +17,4 @@
         {!! $skinForm !!}
     </div>
     @endif
-
-
 </form>
-

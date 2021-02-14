@@ -198,6 +198,13 @@ class WidgetBoxController extends Controller
                     $skinNames[$skinId] = $class->getTitle();
                     $content[$i1][$i2]['widgets'][$i3]['widgetName'] = $widgetNames[$info['@attributes']['id']];
                     $content[$i1][$i2]['widgets'][$i3]['skinName'] = $class->getTitle();
+
+                    // lightning
+                    $color = array_get($info['@attributes'], 'color', '');
+
+                    if ($color === '') {
+                        $content[$i1][$i2]['widgets'][$i3]['@attributes']['color'] = null;
+                    }
                 }
             }
         }

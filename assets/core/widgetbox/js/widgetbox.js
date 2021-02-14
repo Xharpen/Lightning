@@ -1,6 +1,8 @@
 (function (exports, XE, $) {
   'use strict'
 
+
+
   var _cols = 12
   var _mode = 'md'
 
@@ -211,8 +213,9 @@
       if (this.data['skinName'] == undefined) {
         this.data['skinName'] = ''
       }
+
       return [
-        '<div class="xe-well widget" data-uid="' + this.uid + '">',
+        '<div class="xe-well widget" data-uid="' + this.uid + '" style=" background-color:' + this.data['@attributes'].color +'">',
         '<strong>' + this.data['@attributes'].title + '</strong>',
         '<span class="widget-name">' + this.data['widgetName'] + '</span>',
         '<span class="skin-name">(' + this.data['skinName'] + ')</span>',

@@ -2772,6 +2772,10 @@ return [
         'ko' => '위젯 제목',
         'en' => 'Widget title',
     ],
+    'widgetColor' => [
+        'ko' => '위젯 색상',
+        'en' => 'Widget color',
+    ],
     'editArea' => [
         'ko' => '편집 영역',
         'en' => 'Edit Area',

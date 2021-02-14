@@ -64,9 +64,7 @@
   $.fn.serializeObject = function () {
     var o = {}
     var a = this.serializeArray()
-
-    console.log(a);
-
+    // o['$$image'] = [];
     $.each(a, function () {
       if (o[this.name]) {
         if (!o[this.name].push) {
@@ -80,6 +78,25 @@
       }
     })
 
+
+
+    // for(var key in o) {
+    //   if(key.indexOf('@') === -1) {
+    //     try {
+    //       if(key.indexOf('$$image') === -1) {
+    //         if ($('.form-col-' + key).has('.xeuio-medialibrary').length > 0) {
+    //           o['$$image'].push(key);
+    //         }
+    //       }
+    //     }catch(e) {
+    //       console.log(e);
+    //       continue;
+    //     }
+    //   }
+    // }
+    //
+    // console.log(o);
+
     return o;
   }
 
@@ -87,6 +104,8 @@
     var isBinding = false
     $.fn.widgetGenerator = function (opt, cb) {
       var _this = this
+
+      console.log(opt);
 
       var _bindEvents = function () {
         _this.on('change', selectWidget, function () {
@@ -249,16 +268,22 @@
 
           for(var key in _code) {
             if(key.indexOf('@') === -1) {
-              if($('.form-col-'+key).has('.xeuio-medialibrary').length > 0) {
-                  var _key = key;
-                  var _html =['<li class="xeuio-ml__preview-item">',
-                    '<input type="hidden" class="xeuio-ml__field" name="',key,'" value="',_code[key],'">',
-                    '<img class="xeuio-ml__preview-image" src="/file/',_code[key],'">',
-                    '<button type="button" class="xeuio-ml__button xeuio-ml__remove">삭제</button>',
-                    '</li>'].join('');
-                  setTimeout(function () {
-                    $('.form-col-'+_key+' .xeuio-ml__preview').prepend(_html);
-                  });
+              try {
+                // if(key.indexOf('$$image') === -1) {
+                  if ($('.form-col-' + key).has('.xeuio-medialibrary').length > 0) {
+                    var _key = key;
+                    var _html = ['<li class="xeuio-ml__preview-item">',
+                      '<input type="hidden" class="xeuio-ml__field" name="', key, '" value="', _code[key], '">',
+                      '<img class="xeuio-ml__preview-image" src="/file/', _code[key], '">',
+                      '<button type="button" class="xeuio-ml__button xeuio-ml__remove">삭제</button>',
+                      '</li>'].join('');
+                    setTimeout(function () {
+                      $('.form-col-' + _key + ' .xeuio-ml__preview').prepend(_html);
+                    });
+                  // }
+                }
+              }catch(e) {
+                console.log(e);
               }
             }
           }
