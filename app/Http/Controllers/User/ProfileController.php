@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use XePresenter;
 use XeTheme;
 use XeDB;
+use Xpressengine\Permission\Grant;
 use Xpressengine\User\Exceptions\UserNotFoundException;
 use Xpressengine\User\Models\User;
 use Xpressengine\User\Rating;
@@ -66,12 +67,42 @@ class ProfileController extends Controller
      * @param WidgetBoxHandler $handler WidgetBoxHandler instance
      * @return \Xpressengine\Presenter\Presentable
      */
-    public function index($user, WidgetBoxHandler $handler)
+    public function index(string $user, WidgetBoxHandler $handler)
     {
         $user = $this->retrieveUser($user);
         $grant = $this->getGrant($user);
 
-        $widgetbox = $handler->find('user-profile');
+        $userId = $user->getAttribute('id');
+        $widgetboxPrefix = 'user-profile';
+
+        $id = $widgetboxPrefix.$userId;
+        $widgetbox = $handler->find($id);
+
+        if ($widgetbox === null) {
+            $userProfile = $handler->find($widgetboxPrefix);
+
+            $widgetbox = $handler->create([
+                'id' => $id,
+                'title' => 'User Profile',
+                'content' => $userProfile->content,
+                'options' => $userProfile->options,
+            ]);
+        }
+
+        if (!app('xe.permission')->get('widgetbox.' . $id))
+        {
+            $widgetboxGrant = new Grant();
+
+            $widgetboxGrant->set('edit', [
+                Grant::RATING_TYPE => Rating::SUPER,
+                Grant::GROUP_TYPE => [],
+                Grant::USER_TYPE => [$userId],
+                Grant::EXCEPT_TYPE => [],
+                Grant::VGROUP_TYPE => []
+            ]);
+
+            app('xe.permission')->register('widgetbox.' . $id, $widgetboxGrant);
+        }
 
         return XePresenter::make('index', compact('user', 'grant', 'widgetbox'));
     }

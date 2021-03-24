@@ -18,6 +18,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\In;
 use Xpressengine\Permission\Instance;
 use Xpressengine\Support\Exceptions\AccessDeniedHttpException;
 use Xpressengine\Support\IpMatch;
@@ -114,6 +115,10 @@ class SettingsMiddleware
             return;
         }
 
+        if ($route->getPrefix() === '/settings/widget' && $this->checkWidgetBoxPermission()) {
+            return;
+        }
+
         $permissionId = array_get($route->getAction(), 'permission');
 
         if ($permissionId === null) {
@@ -155,5 +160,23 @@ class SettingsMiddleware
         $theme = $config->get('xe.settings.theme');
 
         $themeHandler->selectTheme($theme);
+    }
+
+    /**
+     * 위젯 박스에 대한 편집 권한이 있는지 확인합니다.
+     *
+     * @return bool
+     */
+    protected function checkWidgetBoxPermission()
+    {
+        $path = parse_url(url()->previous())['path'];
+        $moduleUrl = array_get(explode('/', $path), 2);
+        $action =  array_get(explode('/', $path), 3);
+
+        if (empty($moduleUrl) || $action !== 'edit') {
+            return false;
+        }
+
+        return $this->gate->allows('edit', new Instance('widgetbox.'.$moduleUrl));
     }
 }

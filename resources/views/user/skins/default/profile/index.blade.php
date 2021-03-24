@@ -59,7 +59,7 @@
             @if($widgetbox)
             <div class="card-wrap">
                 <div class="xe-container">
-                    {{ uio('widgetbox', ['id' => 'user-profile', 'link'=> xe_trans('xe::edit')]) }}
+                    {{ uio('widgetbox', ['id' => $widgetbox->getAttribute('id'), 'link'=> xe_trans('xe::edit')]) }}
                 </div>
             </div>
             @endif
