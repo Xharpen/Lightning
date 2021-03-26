@@ -55,7 +55,7 @@ var SearchHead = (function (XE, $) {
       return [
         '<div class="pull-left">',
         '<div class="input-group search-group">',
-        '<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Search...">',
+        '<input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="',XE.Lang.trans('xe::searchPlaceholder'),'">',
         '<button class="btn-link btnSearch"><i class="xi-search"></i><span class="sr-only">검색</span></button>',
         '<div class="search-list"></div>',
         '</div>',
@@ -63,7 +63,7 @@ var SearchHead = (function (XE, $) {
         '<div class="pull-right">',
         '<a href="' + _createMenuUrl + '" class="btn btn-primary pull-right">',
         '<i class="xi-plus"></i>',
-        XE.Lang.trans('xe::addMenu'),
+          XE.Lang.trans('xe::addMenu'),
         '</a>',
         '</div>'
       ].join('\n')
@@ -93,7 +93,7 @@ var SearchHead = (function (XE, $) {
     bindEvents: function () {
       this.$searchInput.on('keyup', this.search)
 
-      _$parent.on('click', '.btnSearch', function () {
+      _$parent.on('click', ['.btnSearch', '.search-list li'], function () {
         if (_focus.status === 'open' && _focus.currentIndex >= 0) {
           _this.moveToSelectedItem()
         }
@@ -101,8 +101,11 @@ var SearchHead = (function (XE, $) {
 
       _$parent.on('mouseenter', '.search-list li', function (e) {
         var index = _$parent.find('.search-list li').index($(this))
-
-        _this.setFocus(index)
+        _$parent.find('.search-list li')
+          .removeClass('on')
+          .eq(index)
+          .addClass('on')
+        _focus.currentIndex = index
       })
 
       $(document).on('keydown', function (e) {
@@ -262,8 +265,10 @@ var SearchHead = (function (XE, $) {
      * */
     moveToSelectedItem: function () {
       var id = _$parent.find('li.on').data('id')
-
-      $(document).scrollTop($('#item_' + id).offset().top)
+      $("[id^='item_']").removeClass('active')
+      _this.$searchInput.val(_$parent.find('li.on').text())
+      $(document).scrollTop($('#item_' + id).offset().top - 100)
+      $('#item_' + id).addClass('active')
       _this.toggleSuggestionByStatus('close')
     }
   }

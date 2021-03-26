@@ -1039,6 +1039,10 @@ return [
         'ko' => '사이트 메뉴 구조를 구성하고 관리할 수 있습니다.',
         'en' => 'You can manage site menus.'
     ],
+    'searchPlaceholder' => [
+        'ko' => '검색어를 입력하세요',
+        'en' => 'Search...'
+    ],
     'addMenu' => [
         'ko' => '메뉴 추가',
         'en' => 'Add Menu'
