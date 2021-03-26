@@ -70,7 +70,7 @@ abstract class ShouldOperation extends Command
 
         $output = new MultipleOutput([$output, new StreamOutput(fopen($path, 'a'))]);
 
-        \Log::useFiles($path);
+//        \Log::useFiles($path);
 
         $this->operator->log($file);
         $this->operator->save();

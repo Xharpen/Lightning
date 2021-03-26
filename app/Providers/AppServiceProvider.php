@@ -13,6 +13,7 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Xpressengine\Foundation\Operator;
 
@@ -33,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrapThree();
     }
 
     /**

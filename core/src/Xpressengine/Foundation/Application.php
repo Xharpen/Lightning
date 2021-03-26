@@ -167,9 +167,9 @@ class Application extends BaseApplication
                 \Illuminate\Contracts\Translation\Translator::class
             ],
             'log' => [
-                \Illuminate\Log\Writer::class,
-                \Illuminate\Contracts\Logging\Log::class,
-                \Psr\Log\LoggerInterface::class],
+                \Illuminate\Log\Logger::class,
+                \Psr\Log\LoggerInterface::class
+            ],
             'mailer' => [
                 \Illuminate\Mail\Mailer::class,
                 \Illuminate\Contracts\Mail\Mailer::class,

@@ -154,6 +154,7 @@ class LangPreprocessor
                     list($kSeq, $seq, $kLocale, $locale) = $params;
                     $key = $this->mapSeqKey[$seq];
                     $multiLine = isset($mapSeqMultiLine[$seq]);
+
                     $this->app['xe.translator']->save($key, $locale, $value, $multiLine);
                 }
             }
