@@ -76,7 +76,7 @@ trait ComponentTrait
     /**
      * information을 검색한다.
      *
-     * @param string $key 검색할 information의 키
+     * @param string|null $key 검색할 information의 키
      *
      * @return mixed 검색된 information를 반환함.
      */
@@ -85,7 +85,8 @@ trait ComponentTrait
         if (property_exists(static::class, 'componentInfo')) {
             return array_get(static::$componentInfo, $key);
         }
-        return array_get(self::$componentInfo, static::class.'.'.$key);
+
+        return array_get(self::$componentInfo, is_null($key) ? static::class : static::class.'.'.$key);
     }
 
     /**
