@@ -108,7 +108,8 @@ trait ComponentTrait
         } else {
             $componentInfo = array_get(self::$componentInfo, static::class, []);
             $componentInfo = array_merge($componentInfo, $key);
-            self::$componentInfo = array_add(self::$componentInfo, static::class, $componentInfo);
+
+            self::$componentInfo[static::class] = $componentInfo;
         }
     }
 
